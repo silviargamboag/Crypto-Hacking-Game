@@ -12,4 +12,5 @@ if __name__ =='__main__':
 from . import Usercontroller
 app.register_blueprint(Usercontroller.bp)
 
-
+from . import Authcontroller
+app.register_blueprint(Authcontroller.bp)
