@@ -10,8 +10,8 @@ app.config.update(
 	MAIL_SERVER='smtp.gmail.com',
 	MAIL_PORT=465,
 	MAIL_USE_SSL=True,
-	MAIL_USERNAME = 'soniaperezgarnica@gmail.com',
-	MAIL_PASSWORD = 'Twiga2017'
+	MAIL_USERNAME = 'xxxx',
+	MAIL_PASSWORD = 'xxxx'
 	)
 mail = Mail(app)
 checkalert()
