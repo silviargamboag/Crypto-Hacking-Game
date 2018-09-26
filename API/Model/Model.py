@@ -12,4 +12,11 @@ class User(db.Model):
     password = db.Column(db.String(80))
     admin = db.Column(db.Boolean)
 
+class Alert(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    text = db.Column(db.String(50))
+    value = db.Column(db.Integer)
+    active = db.Column(db.Boolean)
+    user_id = db.Column(db.Integer)
+
 db.create_all()

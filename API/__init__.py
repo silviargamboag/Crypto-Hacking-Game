@@ -14,3 +14,6 @@ app.register_blueprint(Usercontroller.bp)
 
 from . import Authcontroller
 app.register_blueprint(Authcontroller.bp)
+
+from . import Alertcontroller
+app.register_blueprint(Alertcontroller.bp)

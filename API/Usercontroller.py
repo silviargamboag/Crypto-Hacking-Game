@@ -2,10 +2,12 @@ from flask import Flask, request, jsonify, make_response, Blueprint, flash
 from flask_sqlalchemy import SQLAlchemy, sqlalchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from .Model.Model import db, User
+from .Authcontroller import token
 bp = Blueprint('user', __name__)
 
 @bp.route('/create/user', methods=['POST'])
-def create_user():
+@token
+def create_user(current_user):
     data = request.get_json()
     hashed_password = generate_password_hash(data['password'], method='sha256')
     new_user = User(name=data['name'], email=data['email'], password=hashed_password, admin=True)
@@ -21,7 +23,8 @@ def create_user():
 
 
 @bp.route('/get/user', methods=['GET'])
-def get_user():
+@token
+def get_user(current_user):
     users = User.query.all()
     result = []
     for user in users:
@@ -36,7 +39,8 @@ def get_user():
     return jsonify(result) 
 
 @bp.route('/edit/user/<id>', methods=['PUT'])
-def edit_user_id(id):
+@token
+def edit_user_id(current_user, id):
     user = User.query.filter_by(id=int(id)).first()
     data = request.get_json()
 
@@ -50,7 +54,8 @@ def edit_user_id(id):
     return jsonify({'message':'User modified'}) 
 
 @bp.route('/delete/user/<id>', methods=['DELETE'])
-def delete_user_id(id):
+@token
+def delete_user_id(current_user, id):
     user = User.query.filter_by(id=int(id)).first()
    
     db.session.delete(user)
